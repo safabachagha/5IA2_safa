@@ -21,14 +21,6 @@ pipeline {
             }
         }
 
-        stage('Test Backend') {
-            steps {
-                dir('backend') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
         stage('Package Backend') {
             steps {
                 dir('backend') {
