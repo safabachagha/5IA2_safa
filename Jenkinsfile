@@ -6,6 +6,10 @@ pipeline {
         maven 'M2_HOME'
     }
 
+    environment {
+        IMAGE_NAME = "safabachagha/appgestiondesprojets-backend"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -34,5 +38,14 @@ pipeline {
                 archiveArtifacts artifacts: 'backend/target/*.jar', fingerprint: true
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('backend') {
+                    sh 'docker build -t ${IMAGE_NAME}:latest .'
+                }
+            }
+        }
     }
 }
+
