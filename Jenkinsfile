@@ -59,4 +59,12 @@ pipeline {
             }
         }
     }
+
+    post {
+        failure {
+            mail to: 'smarttravelagency07@gmail.com',
+                 subject: "ÉCHEC du build: ${currentBuild.fullDisplayName}",
+                 body: "Le build a échoué.\n\nVoir les détails ici : ${env.BUILD_URL}"
+        }
+    }
 }
